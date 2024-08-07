@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkout } from '../redux/actions/orderActions';
 import numberComma from './assets/commaMoney';
 
 const CheckoutCard = ({data, onResetOrder}) => {
     const [totalPrice, setTotalPrice] = useState(0);
+    const dispatch = useDispatch();
+    const orderState = useSelector((state) => state.order);
 
     useEffect(() => {
         const calculateTotalPrice = () => {
@@ -13,6 +17,16 @@ const CheckoutCard = ({data, onResetOrder}) => {
         };
         calculateTotalPrice();
     }, [data]);
+
+    const handleCheckout = () => {
+        dispatch(checkout(data, totalPrice));
+        if (orderState.error) {
+            alert('Checkout failed: ' + orderState.error);
+        } else {
+            onResetOrder();
+            alert('Checkout successful');
+        }
+    };
     
     return(
         <>
@@ -28,7 +42,7 @@ const CheckoutCard = ({data, onResetOrder}) => {
                         Total Price: <span className='font-bold'>Rp. {numberComma(totalPrice)}</span>
                     </div>
                     <button className='w-full bg-orange-700 rounded-md text-white p-2 mt-5 hover:bg-orange-900 duration-200' onClick={onResetOrder}>Reset</button>
-                    <button className='w-full bg-orange-700 rounded-md text-white p-2 mt-5 hover:bg-orange-900 duration-200'>Checkout</button>
+                    <button className='w-full bg-orange-700 rounded-md text-white p-2 mt-5 hover:bg-orange-900 duration-200' onClick={handleCheckout}>Checkout</button>
             </div>
             </div>
         </>

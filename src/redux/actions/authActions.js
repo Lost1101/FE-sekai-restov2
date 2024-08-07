@@ -18,7 +18,10 @@ export const signup = (username, email, password) => async (dispatch) => {
     try {
       const response = await axios.post(`${config.apiUrl}/login`, { username, password });
       localStorage.setItem('token', response.data.token);
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data.token });
+      dispatch({ 
+        type: LOGIN_SUCCESS, 
+        payload: { token: response.data.token, user: response.data.user } 
+      });
     } catch (error) {
       alert(error.response.data.message || error.message);
     }

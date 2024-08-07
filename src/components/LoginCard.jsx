@@ -11,14 +11,24 @@ const LoginCard = ({show, handleClose}) => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
+    const resetForm = () => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+    };
+
     const handleSignup = (e) => {
         e.preventDefault();
         dispatch(signup(username, email, password));
+        resetForm();
+        handleClose('false');
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch(login(username, password));
+        resetForm();
+        handleClose('false');
     };
 
     return(
@@ -34,8 +44,8 @@ const LoginCard = ({show, handleClose}) => {
                 </div>
                 <div className={`${activeButton === 'login' ? 'block' : 'hidden'}`}>
                     <form onSubmit={handleLogin} autoComplete='off' className='mb-5'>
-                        <input onChange={(e) => setUsername(e.target.value)} type="text" name="username" placeholder="Username" className="w-full rounded-md p-2 border border-black mt-5" required/>
-                        <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" className="w-full rounded-md p-2 border border-black mt-5" required/>
+                        <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username" placeholder="Username" className="w-full rounded-md p-2 border border-black mt-5" required/>
+                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" className="w-full rounded-md p-2 border border-black mt-5" required/>
                         <div className='mt-5 flex justify-between text-xs'>
                             <div>
                                 <input type="checkbox" name="Remember me" className='accent-orange-700'/><span className='ml-1'>Remember me</span>
@@ -49,9 +59,9 @@ const LoginCard = ({show, handleClose}) => {
                 </div>
                 <div className={`${activeButton === 'signup' ? 'block' : 'hidden'}`}>
                 <form onSubmit={handleSignup} autoComplete='off'  className='mb-5'>
-                        <input onChange={(e) => setUsername(e.target.value)} type="text" name="username" placeholder="Username" className="w-full rounded-md p-2 border border-black mt-5" required/>
-                        <input onChange={(e) => setEmail(e.target.value)} type="text" name="email" placeholder="Email" className="w-full rounded-md p-2 border border-black mt-5" required/>
-                        <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" className="w-full rounded-md p-2 border border-black mt-5" required/>
+                        <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="username" placeholder="Username" className="w-full rounded-md p-2 border border-black mt-5" required/>
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="email" placeholder="Email" className="w-full rounded-md p-2 border border-black mt-5" required/>
+                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" placeholder="Password" className="w-full rounded-md p-2 border border-black mt-5" required/>
                         <div className='mt-5'>
                             <input type="checkbox" name="Remember me" className='accent-orange-700'/><span className='ml-1 text-xs font-semibold'>I agree to the Privacy Policy and Terms of Service</span>
                         </div>

@@ -9,9 +9,9 @@ export default function authReducer(state = initialState, action) {
       case REGISTER_SUCCESS:
         return { ...state};
       case LOGIN_SUCCESS:
-        return { ...state, token: action.payload, isAuthenticated:true };
+        return { ...state, token: action.payload, isAuthenticated:true, user: action.payload.user, };
       case LOGOUT:
-        return { ...state, token: null, isAuthenticated:false };
+        return { ...state, token: null, isAuthenticated:false,  user: null};
       default:
         return state;
     }

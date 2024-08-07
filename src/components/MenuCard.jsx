@@ -9,6 +9,7 @@ const MenuCard = ({ order, onOrderChange }) => {
     const [count, setCount] = useState({});
     const [price, setPrice] = useState({});
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const menus = useSelector((state) => state.menus.menus);
 
     useEffect(() => {
@@ -64,7 +65,7 @@ const MenuCard = ({ order, onOrderChange }) => {
                 <div className="border border-black bg-white rounded-md flex justify-evenly" key={data.id}>
                     <div>
                         <img src={foodLanding} alt="" className="w-24 rounded-md mt-3" />
-                        <button className="bg-orange-700 text-white font-semibold rounded-md w-full p-2 inline-block mt-3 hover:bg-orange-900 duration-200" onClick={() => { handleOrder([data.id, data.nama, price[data.id], count[data.id]]); }}>Order</button>
+                        {isAuthenticated ? <button className="bg-orange-700 text-white font-semibold rounded-md w-full p-2 inline-block mt-3 hover:bg-orange-900 duration-200" onClick={() => { handleOrder([data.id, data.nama, price[data.id], count[data.id]]); }}>Order</button> : ''}
                     </div>
                     <div className="p-5 w-2/3">
                         <h1 className="font-bold text-lg">{data.nama}</h1>
@@ -72,11 +73,11 @@ const MenuCard = ({ order, onOrderChange }) => {
                             <p className="text-xs">{data.desc}</p>
                         </div>
                         <div className="flex text-xs w-full">
-                            <div className="border border-black mr-5 rounded-md">
+                        {isAuthenticated ? <div className="border border-black mr-5 rounded-md">
                                 <button onClick={() => increment(data.id)} className="pr-2 pl-2 p-1 duration-300 hover:bg-gray-300">+</button>
                                 <span className="pr-3 pl-3 p-1">{count[data.id]}</span>
                                 <button onClick={() => decrement(data.id)} className="pr-2 pl-2 p-1 duration-300 hover:bg-gray-300">-</button>
-                            </div>
+                            </div> : ''}
                             <div className="mt-1">
                                 <span className="text-gray-400"><IoIosTime className="inline-block mr-1" />{data.waktu} min</span>
                                 <span className="mr-5 ml-5 font-semibold">Rp. {numberComma(price[data.id])}</span>
