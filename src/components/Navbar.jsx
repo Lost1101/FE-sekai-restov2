@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginCard from './LoginCard';
 import { GrRestaurant } from "react-icons/gr";
+import { useDispatch, useSelector} from 'react-redux';
+import { logout } from '../redux/actions/authActions';
 
 const Navbar = ({ pages }) => {
     const [show, setShow] = useState(false);
@@ -13,6 +15,13 @@ const Navbar = ({ pages }) => {
     const hideLogin = () => {
         setShow(false);
     }
+
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+    const handleLogout = () => {
+        dispatch(logout());
+    };
 
     return(
         <>
@@ -27,9 +36,11 @@ const Navbar = ({ pages }) => {
                     ))}
                 </div>
                 <div>
-                    <button className='bg-orange-700 text-white font-semibold rounded-md pr-5 pl-5 p-2 inline-block mr-2 hover:bg-orange-900 duration-200' onClick={() => showLogin()}>
+                    {isAuthenticated ? <button className='bg-orange-700 text-white font-semibold rounded-md pr-5 pl-5 p-2 inline-block mr-2 hover:bg-orange-900 duration-200' onClick={() => handleLogout()}>
+                        Logout
+                    </button> : <button className='bg-orange-700 text-white font-semibold rounded-md pr-5 pl-5 p-2 inline-block mr-2 hover:bg-orange-900 duration-200' onClick={() => showLogin()}>
                         Login
-                    </button>
+                    </button>}
                 </div>
             </div>
         </>

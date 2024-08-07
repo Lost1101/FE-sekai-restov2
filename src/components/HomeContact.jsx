@@ -27,7 +27,7 @@ const Contact = () => {
                             <MdEmail className="inline-block mr-4"/><span>waduh@gmail.com</span>
                         </div>
                     </div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d47824.008967596106!2d108.16850611872457!3d-7.245816391864848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1721618414551!5m2!1sid!2sid" width={350} height={200} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d47824.008967596106!2d108.16850611872457!3d-7.245816391864848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1721618414551!5m2!1sid!2sid" width={350} height={200} loading="lazy"></iframe>
                 </div>
                 <div>
                     <h1 className="text-white font-bold block">Follow Us</h1>
@@ -43,7 +43,7 @@ const Contact = () => {
                     <form action="" className="mt-5">
                         <input type="name" name="name" id="name" placeholder="Your name..." className="block mt-5 p-2 rounded-md w-full"/>
                         <textarea name="content" id="content" placeholder="Type here..." className="block mt-5 p-2 rounded-md w-full"></textarea>
-                        <button type="submit" className="border border-white rounded-md p-2 mt-5 text-white hover:bg-orange-800 duration-200">Submit</button>
+                        <button type="submit" className="border border-white rounded-md p-2 mt-5 text-white hover:bg-white hover:text-orange-700 duration-200">Submit</button>
                     </form>
                 </div>
             </div>

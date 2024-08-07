@@ -16,7 +16,7 @@ const Menu = () => {
     return(
         <>
         <div className="pt-28 flex">
-            <MenuCard onOrderChange={handleOrderChange}/>
+            <MenuCard order={order} onOrderChange={handleOrderChange} />
             <CheckoutCard data={order} onResetOrder={resetOrder}/>
         </div>
         </>

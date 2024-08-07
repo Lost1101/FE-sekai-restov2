@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import numberComma from './assets/commaMoney';
 
 const CheckoutCard = ({data, onResetOrder}) => {
     const [totalPrice, setTotalPrice] = useState(0);
@@ -6,7 +7,7 @@ const CheckoutCard = ({data, onResetOrder}) => {
     useEffect(() => {
         const calculateTotalPrice = () => {
             const total = data.reduce((acc, order) => {
-                return acc + order.hrg * order.jml;
+                return acc + order.harga * order.jml;
             }, 0);
             setTotalPrice(total);
         };
@@ -24,7 +25,7 @@ const CheckoutCard = ({data, onResetOrder}) => {
                     </div>
                 ))}
                     <div className="mt-5">
-                        Total Price: <span className='font-bold'>Rp. {totalPrice}</span>
+                        Total Price: <span className='font-bold'>Rp. {numberComma(totalPrice)}</span>
                     </div>
                     <button className='w-full bg-orange-700 rounded-md text-white p-2 mt-5 hover:bg-orange-900 duration-200' onClick={onResetOrder}>Reset</button>
                     <button className='w-full bg-orange-700 rounded-md text-white p-2 mt-5 hover:bg-orange-900 duration-200'>Checkout</button>
